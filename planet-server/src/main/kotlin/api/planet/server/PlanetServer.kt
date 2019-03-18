@@ -17,8 +17,7 @@ class PlanetServer : AbstractVerticle() {
   }
 
   override fun start(startFuture: Future<Void>) {
-
-    OpenAPI3RouterFactory.create(vertx, "src/main/resources/specs/planet.yaml", { spec ->      
+    OpenAPI3RouterFactory.create(vertx, System.getProperty("openapi.spec"), { spec ->      
       if (spec.succeeded()) {
         log.info("[Reading spec succeed]")
         val routerFactory = spec.result()

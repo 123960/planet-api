@@ -245,15 +245,17 @@ Há o commit do .jar pronto para execução:
 .\planet-server\target\planet-server-1.0.0-fat.jar
 ```
 
-Iniciar a JVM com o comando abaixo:
+Fazer o checkout do project, na raiz executar a JVM:
+
 ```sh
-java -jar target\planet-server-1.0.0-fat.jar -Dlogback.configuration=.\src\main\resources\logback.xml -Dplanet.log=.\log -Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory -Dvertx.port=4000 -Dcassandra.contactpoint=localhost -Dcassandra.keyspace=planet_cli -Drest.get.limit=50 -dvertx.disableDnsResolver=true
+java -jar ./planet-server/target/planet-server-1.0.0-fat.jar -Dlogback.configuration=./src/main/resources/logback.xml -Dplanet.log=./planet-server/log -Dopenapi.spec=./planet-server/src/main/resources/specs/planet.yaml -Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory -Dvertx.port=4000 -Dcassandra.contactpoint=localhost -Dcassandra.keyspace=planet_cli -Drest.get.limit=50 -dvertx.disableDnsResolver=true
 ```
 
 Abaixo a descrição dos diversos parâmetros:
 | -DParam | Descrição |
 | ------ | ------ |
 | logback.configuration | Apontamento para o arquivo de logs do logback |
+| openapi.spec | Apontamento para o arquivo de especificação de API OpenAPI |
 | planet.log | Diretório para despejo de logs |
 | vertx.logger-delegate-factory-class-name= | Classe para delegate de logs do Vert.x |
 | vertx.port | Porta para disponibilização do serviço HTTP |
