@@ -1,1 +1,6 @@
-Java.gitignore
+.project
+planet-server/.mvn/*
+planet-server/log/*
+planet-server/target/classes/*
+planet-server/target/kotlin-ic/*
+planet-server/target/maven-status/*

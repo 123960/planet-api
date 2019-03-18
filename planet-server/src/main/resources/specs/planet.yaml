@@ -1,0 +1,177 @@
+openapi: 3.0.0
+info:
+  description: Planet API Specification
+  version: 1.0.0
+  title: planet-api
+servers:
+  - url: 'http://0.0.0.0:4000'
+paths:
+  '/v1/swapi':
+    get:
+      tags:
+      - "planet"
+      operationId: get-swapi
+      responses:
+        '200':
+          description: Success getting a specific planet
+          $ref: '#/components/schemas/Planets'          
+          headers:
+            Content-Type:
+              required: true
+              type: string
+        '500':
+          description: Internal Error
+          $ref: '#/components/schemas/Message'
+          headers:
+            Content-Type:
+              required: true
+              type: string
+  '/v1/planet':
+    post:
+      tags:
+      - "planet"
+      operationId: post-planet
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        description: The Content-Type request HTTP header is used to indicate the resource file type.
+        schema:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum: [application/json]
+      responses:
+        '200':
+          description: Success getting a specific planet
+          $ref: '#/components/schemas/Planet'          
+          headers:
+            Content-Type:
+              required: true
+              type: string
+        '500':
+          description: Internal Error
+          $ref: '#/components/schemas/Message'
+          headers:
+            Content-Type:
+              required: true
+              type: string
+    get:
+      tags:
+      - "planet"
+      operationId: get-planet
+      parameters:
+      - in: query
+        name: name
+        description: Filter the return to planets with a given name
+        schema:
+          type: string
+      - in: query
+        name: limit
+        description: Limit records to return, default is 10000
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success getting a specific planet
+          $ref: '#/components/schemas/Planets'          
+          headers:
+            Content-Type:
+              required: true
+              type: string
+        '500':
+          description: Internal Error
+          $ref: '#/components/schemas/Message'
+          headers:
+            Content-Type:
+              required: true
+              type: string
+  '/v1/planet/{planetId}':
+    delete:
+      tags:
+      - "planet"
+      operationId: delete-planet-by-id
+      parameters:
+      - name: "planetId"
+        in: "path"
+        description: Unique id of a planet, matched with https://swapi.co/
+        required: true
+        schema:
+          type: "integer"
+      responses:
+        '200':
+          description: Success deleting a specific planet
+        '404':
+          description: Planet not found
+        '500':
+          description: Internal Error
+          $ref: '#/components/schemas/Message'
+          headers:
+            Content-Type:
+              required: true
+              type: string
+    get:
+      tags:
+      - "planet"
+      operationId: get-planet-by-id
+      parameters:
+      - name: "planetId"
+        in: "path"
+        description: Unique id of a planet, matched with https://swapi.co/
+        required: true
+        schema:
+          type: "integer"
+      responses:
+        '200':
+          description: Success getting a specific planet
+          $ref: '#/components/schemas/Planet'          
+          headers:
+            Content-Type:
+              required: true
+              type: string
+        '404':
+          description: Planet not found
+        '500':
+          description: Internal Error
+          $ref: '#/components/schemas/Message'
+          headers:
+            Content-Type:
+              required: true
+              type: string
+components:
+  schemas:
+    Planets:
+      description: Array of planets
+      type: array
+      items:
+        $ref: '#/components/schemas/Planet'
+    Planet:
+      description: Planet definition
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique id of a planet, matched with https://swapi.co/
+        name:          
+          type: string
+          description: Name of this planet, provided in planet creation
+        climate:          
+          type: string
+          description: Climate classification of this planet, provided in planet creation
+        terrain:
+          type: string
+          description: Terrain classification of this planet, provided in planet creation
+        exhibitions:
+          type: integer
+          description: Number of times that this planet appears in Star Wars movies, sourced from https://swapi.co/ (overwrites if any is informed)
+    Message:
+      description: Message definition
+      type: object
+      properties:
+        code:
+          type: string
+          description: Result code of operation
+        message:
+          type: string
+          description: Result message of operation
