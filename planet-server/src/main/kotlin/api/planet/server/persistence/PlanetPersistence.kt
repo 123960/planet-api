@@ -45,7 +45,7 @@ object PlanetPersistence {
           val session = cluster.connect("planet_cli")
           val result  = session.execute("delete from planet where id = $id")
                               .one()
-                              ?.toString()
+                              ?.getString(0)
           log.info("[deletePlanetById][result: $result]")
           "ok"
         } catch (e: Exception) {
@@ -61,7 +61,7 @@ object PlanetPersistence {
           val session = cluster.connect("planet_cli")
           val result  = session.execute("select json * from planet where id = $id")
                               .one()
-                              ?.toString()
+                              ?.getString(0)
           log.info("[getPlanetById][result: $result]")
           result
         } catch (e: Exception) {

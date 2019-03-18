@@ -135,7 +135,7 @@ HTTP/1.1 200
 status: 200
 content-type: application/json
 content-length: 112
-Row[{"id": 1, "name": "Alderaan", "climate": "temperate", "exhibitions": 5, "terrain": "grasslands, mountains"}]
+{"id": 1, "name": "Alderaan", "climate": "temperate", "exhibitions": 5, "terrain": "grasslands, mountains"}
 ```
 
 ## Remover planeta
@@ -158,7 +158,7 @@ HTTP/1.1 200
 status: 200
 content-type: application/json
 content-length: 112
-Row[{"id": 1, "name": "Alderaan", "climate": "temperate", "exhibitions": 5, "terrain": "grasslands, mountains"}]
+{"id": 1, "name": "Alderaan", "climate": "temperate", "exhibitions": 5, "terrain": "grasslands, mountains"}
 ```
 
 
