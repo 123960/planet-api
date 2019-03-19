@@ -252,6 +252,7 @@ java -jar ./planet-server/target/planet-server-1.0.0-fat.jar -Dlogback.configura
 ```
 
 Abaixo a descrição dos diversos parâmetros:
+
 | -DParam | Descrição |
 | ------ | ------ |
 | logback.configuration | Apontamento para o arquivo de logs do logback |
